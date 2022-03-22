@@ -38,6 +38,8 @@ LUAMOD_API int luaopen_esphttp(lua_State *L);
 LUAMOD_API int luaopen_espmqtt(lua_State *L);
 LUAMOD_API int luaopen_i2s(lua_State *L);
 LUAMOD_API int luaopen_twai(lua_State *L);
+//定义带break发送的uart
+LUAMOD_API int luaopen_uart_brk(lua_State *L)
 LUAMOD_API int luaopen_sdmmc(lua_State *L);
 LUAMOD_API int luaopen_miniz(lua_State *L);
 
@@ -70,6 +72,7 @@ static const luaL_Reg loadedlibs[] = {
 // 设备驱动类, 可按实际情况删减. 即使最精简的固件, 也强烈建议保留uart库
 #ifdef LUAT_USE_UART
     {"uart", luaopen_uart}, // 串口操作
+    {"uart_brk",luaopen_uart_brk},//串口操作 带发送break
 #endif
 #ifdef LUAT_USE_GPIO
     {"gpio", luaopen_gpio}, // GPIO脚的操作
