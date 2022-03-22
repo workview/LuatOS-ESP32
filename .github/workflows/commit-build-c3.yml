@@ -49,5 +49,5 @@ jobs:
       - name: Upload firmware
         uses: actions/upload-artifact@main
         with:
-          name: c3-release0322
+          name: c3-release0322a
           path: firmware/
