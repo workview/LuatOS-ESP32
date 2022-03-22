@@ -41,6 +41,7 @@ jobs:
         run: |
           pip3 install -r tools/requirements.txt
           cd tools/
+          sed -i 's/Release = false/Release = true/' config.toml
           python3 esp32v3.py -t esp32c3 -p
           cd ..
           mkdir firmware
@@ -48,5 +49,5 @@ jobs:
       - name: Upload firmware
         uses: actions/upload-artifact@main
         with:
-          name: c3-master
+          name: c3-release
           path: firmware/
