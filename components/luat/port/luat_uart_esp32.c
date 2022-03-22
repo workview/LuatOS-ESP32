@@ -199,16 +199,6 @@ int luat_uart_write(int uartid, void *data, size_t length)
         return -1;
 }
 
-int luat_uart_write_break(int uartid, void *data, size_t length,size_t brk_len)
-{
-    if (luat_uart_exist(uartid))
-    {
-        int len = uart_write_bytes_with_break(uartid, (const char *)data, length,brk_len);
-        return len;
-    }
-    else
-        return -1;
-}
 
 
 void luat_shell_write(char *buff, size_t len)
@@ -251,8 +241,21 @@ int luat_setup_cb(int uartid, int received, int sent)
     return 0;
 }
 
+
+
 #if 1
 //定义带break发送的uart
+int luat_uart_write_break(int uartid, void *data, size_t length,size_t brk_len)
+{
+    if (luat_uart_exist(uartid))
+    {
+        int len = uart_write_bytes_with_break(uartid, (const char *)data, length,brk_len);
+        return len;
+    }
+    else
+        return -1;
+}
+
 #include "rotable.h"
 static const rotable_Reg_t reg_uart_brk[] =
 {
