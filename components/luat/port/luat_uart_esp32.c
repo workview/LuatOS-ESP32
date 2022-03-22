@@ -208,7 +208,7 @@ int luat_uart_write_break(int uartid, void *data, size_t length,size_t brk_len)
 #include "rotable2.h"
 static const rotable_Reg_t reg_uart_brk[] =
 {
-    { "write_brk",      ROREG_FUNC(luat_uart_write_break),0},
+    { "write_brk", luat_uart_write_break, 0},
     {NULL, NULL, 0}
 };
 
