@@ -193,6 +193,32 @@ int luat_uart_write(int uartid, void *data, size_t length)
         return -1;
 }
 
+int luat_uart_write_break(int uartid, void *data, size_t length,size_t brk_len)
+{
+    if (luat_uart_exist(uartid))
+    {
+        int len = uart_write_bytes_with_break(uartid, (const char *)data, length,brk_len);
+        return len;
+    }
+    else
+        return -1;
+}
+
+//定义带break发送的uart
+#include "rotable2.h"
+static const rotable_Reg_t reg_uart_brk[] =
+{
+    { "write_brk",      ROREG_FUNC(luat_uart_write_break),0},
+    {NULL, NULL, 0}
+};
+
+LUAMOD_API int luaopen_uart_brk(lua_State *L)
+{
+    luat_newlib2(L, reg_uart_brk);
+    return 1;
+}
+
+
 void luat_shell_write(char *buff, size_t len)
 {
     uart_write_bytes(0, (const char *)buff, len);
