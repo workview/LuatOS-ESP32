@@ -251,9 +251,9 @@ int luat_setup_cb(int uartid, int received, int sent)
     return 0;
 }
 
-/***
+#if 1
 //定义带break发送的uart
-#include "rotable2.h"
+#include "rotable.h"
 static const rotable_Reg_t reg_uart_brk[] =
 {
     { "write_brk", luat_uart_write_break, 0},
@@ -265,5 +265,5 @@ LUAMOD_API int luaopen_uart_brk(lua_State *L)
     luat_newlib2(L, reg_uart_brk);
     return 1;
 }
-***/
+#endif
 
