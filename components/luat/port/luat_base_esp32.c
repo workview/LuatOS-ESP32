@@ -39,7 +39,7 @@ LUAMOD_API int luaopen_espmqtt(lua_State *L);
 LUAMOD_API int luaopen_i2s(lua_State *L);
 LUAMOD_API int luaopen_twai(lua_State *L);
 //定义带break发送的uart
-LUAMOD_API int luaopen_uart_brk(lua_State *L)
+LUAMOD_API int luaopen_uart_brk(lua_State *L);
 LUAMOD_API int luaopen_sdmmc(lua_State *L);
 LUAMOD_API int luaopen_miniz(lua_State *L);
 
