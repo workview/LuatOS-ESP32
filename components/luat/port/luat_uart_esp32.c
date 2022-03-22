@@ -257,16 +257,17 @@ int luat_uart_write_break(int uartid, void *data, size_t length,size_t brk_len)
 }
 
 #include "rotable.h"
-static const rotable_Reg_t reg_uart_brk[] =
-{
-    { "write_brk", luat_uart_write_break, 0},
-    {NULL, NULL, 0}
-};
+static const rotable_Reg reg_uart_brk[] =
+    {
+        { "write_brk", luat_uart_write_break, 0},
+        {NULL, NULL, 0}};
 
 LUAMOD_API int luaopen_uart_brk(lua_State *L)
 {
-    luat_newlib2(L, reg_uart_brk);
+    luat_newlib(L, reg_uart_brk);
     return 1;
 }
+
+
 #endif
 
