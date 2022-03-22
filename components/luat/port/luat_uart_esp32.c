@@ -5,6 +5,12 @@
  */
 
 #include "luat_base.h"
+
+#include "string.h"
+#include "esp_err.h"
+#include "esp_log.h"
+
+
 #include "luat_uart.h"
 #include "luat_shell.h"
 #include "luat_log.h"
@@ -204,20 +210,6 @@ int luat_uart_write_break(int uartid, void *data, size_t length,size_t brk_len)
         return -1;
 }
 
-//定义带break发送的uart
-#include "rotable2.h"
-static const rotable_Reg_t reg_uart_brk[] =
-{
-    { "write_brk", luat_uart_write_break, 0},
-    {NULL, NULL, 0}
-};
-
-LUAMOD_API int luaopen_uart_brk(lua_State *L)
-{
-    luat_newlib2(L, reg_uart_brk);
-    return 1;
-}
-
 
 void luat_shell_write(char *buff, size_t len)
 {
@@ -258,3 +250,20 @@ int luat_setup_cb(int uartid, int received, int sent)
 {
     return 0;
 }
+
+/***
+//定义带break发送的uart
+#include "rotable2.h"
+static const rotable_Reg_t reg_uart_brk[] =
+{
+    { "write_brk", luat_uart_write_break, 0},
+    {NULL, NULL, 0}
+};
+
+LUAMOD_API int luaopen_uart_brk(lua_State *L)
+{
+    luat_newlib2(L, reg_uart_brk);
+    return 1;
+}
+***/
+
