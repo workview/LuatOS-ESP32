@@ -230,12 +230,12 @@ newsocket,remote_ip = socket.accept()
 static int l_socket_accept(lua_State *L)
 {
   int sock = luaL_checkinteger(L, 1); /* server socked */
-  int sock_conn;			          /* request socked */
+  int sock_conn;		      /* request socked */
   struct sockaddr remote_ip;
   socklen_t remote_addrlen;
   sock_conn=lwip_accept(sock,&remote_ip,&remote_addrlen);
   lua_pushinteger(L, sock_conn);
-  lua_pushlstring(L, (const char *)&remote_ip, sizeof(struct sockaddr))
+  lua_pushlstring(L, (const char *)&remote_ip, sizeof(struct sockaddr));
   return 1; 
 }
 
@@ -251,7 +251,7 @@ static const rotable_Reg reg_socket[] =
         {"dns", l_socket_dns, 0},
     
         /*@xjf 0323*/ 
-		{"bind",l_socket_bind,0},
+	{"bind",l_socket_bind,0},
       	{"listen",l_socket_listen,0},
         {"accept",l_socket_accept,0},
         /*@xjf 0323*/    
