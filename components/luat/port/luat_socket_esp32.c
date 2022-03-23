@@ -164,6 +164,82 @@ static int l_socket_dns(lua_State *L)
     return 1;
 }
 
+/*
+绑定端口
+@api socket.bind(sock_handle,port)
+@int sock_handle
+@string ip=0
+@int port
+@return int err
+@usage
+err = socket.bind(sock, 33863)
+log.info("socket","bind",err)
+
+*/
+
+static int l_socket_bind(lua_State *L)
+{
+    struct sockaddr_in local;
+    //struct sockaddr_in dest_addr;
+    size_t len = 0;
+    int sock = luaL_checkinteger(L, 1);
+    //const char *host_ip = luaL_checklstring(L, 2, &len);
+    int host_port = luaL_checkinteger(L, 2);
+
+    local.sin_addr.s_addr = IPADDR_ANY;
+    local.sin_family      = AF_INET;
+    local.sin_port        = htons(host_port);
+
+    int err = bind(sock, (struct sockaddr *)&local, sizeof(struct sockaddr_in6));
+    //fcntl(sock, F_SETFL, O_NONBLOCK);
+    lua_pushinteger(L, err);
+    return 1;
+}
+
+/*
+侦听端口
+@api socket.listen(sock_handle,backlog)
+@int sock_handle
+@int backlog 最大连接数
+@return int err
+@usage
+err = socket.listen(sock, 1)
+log.info("socket","listen",err)
+*/
+//#define MAX_SERVER   1
+static int l_socket_listen(lua_State *L)
+{
+   int sock = luaL_checkinteger(L, 1);
+   int backlog = luaL_checkinteger(L, 2);  
+   int err = listen(sock, backlog);
+   lua_pushinteger(L, err);
+   return 1;   
+}
+
+/*
+接收连接
+@api socket.accept(sock_handl)
+@int sock_handle
+@return int err
+@return newsocket sock_conn
+@return remote_ip
+@usage
+newsocket,remote_ip = socket.accept()
+
+*/
+static int l_socket_accept(lua_State *L)
+{
+  int sock = luaL_checkinteger(L, 1); /* server socked */
+  int sock_conn;			          /* request socked */
+  struct sockaddr remote_ip;
+  socklen_t remote_addrlen;
+  sock_conn=lwip_accept(sock,&remote_ip,&remote_addrlen);
+  lua_pushinteger(L, sock_conn);
+  lua_pushlstring(L, (const char *)&remote_ip, sizeof(struct sockaddr))
+  return 1; 
+}
+
+
 #include "rotable.h"
 static const rotable_Reg reg_socket[] =
     {
@@ -173,6 +249,13 @@ static const rotable_Reg reg_socket[] =
         {"recv", l_socket_recv, 0},
         {"close", l_socket_close, 0},
         {"dns", l_socket_dns, 0},
+    
+        /*@xjf 0323*/ 
+		{"bind",l_socket_bind,0},
+      	{"listen",l_socket_listen,0},
+        {"accept",l_socket_accept,0},
+        /*@xjf 0323*/    
+    
 
         {"TCP", NULL, SOCK_STREAM},
         {"UDP", NULL, SOCK_DGRAM},
