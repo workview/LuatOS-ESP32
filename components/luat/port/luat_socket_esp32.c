@@ -192,6 +192,7 @@ static int l_socket_bind(lua_State *L)
 
     int err = bind(sock, (struct sockaddr *)&local, sizeof(struct sockaddr_in6));
     //fcntl(sock, F_SETFL, O_NONBLOCK);
+    ESP_LOGE(TAG, "bind bind bind %d", 0);	
     lua_pushinteger(L, err);
     return 1;
 }
