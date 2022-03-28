@@ -180,6 +180,7 @@ log.info("socket","bind",err)
 static int l_socket_bind(lua_State *L)
 {
     struct sockaddr_in local;
+    int err=0; 	
     //struct sockaddr_in dest_addr;
     size_t len = 0;
     int sock = luaL_checkinteger(L, 1);
@@ -190,7 +191,7 @@ static int l_socket_bind(lua_State *L)
     local.sin_family      = AF_INET;
     local.sin_port        = htons(host_port);
 
-    int err = bind(sock, (struct sockaddr *)&local, sizeof(struct sockaddr_in6));
+    err = bind(sock, (struct sockaddr *)&local, sizeof(struct sockaddr_in6));
     //fcntl(sock, F_SETFL, O_NONBLOCK);
     ESP_LOGE(TAG, "bind bind bind success need=0 ----------%d", err);	
     lua_pushinteger(L, err);
@@ -239,7 +240,7 @@ static int l_socket_accept(lua_State *L)
    {
      if(sock_conn!=0)
      {
-       ESP_LOGE(TAG, "sock_conn success ----------sock_conn=%d", err);
+       ESP_LOGE(TAG, "sock_conn success ----------sock_conn=%d", sock_conn);
      } 
    }
   lua_pushinteger(L, sock_conn);
