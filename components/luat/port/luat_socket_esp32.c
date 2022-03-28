@@ -192,7 +192,7 @@ static int l_socket_bind(lua_State *L)
 
     int err = bind(sock, (struct sockaddr *)&local, sizeof(struct sockaddr_in6));
     //fcntl(sock, F_SETFL, O_NONBLOCK);
-    ESP_LOGE(TAG, "bind bind bind %d", 0);	
+    ESP_LOGE(TAG, "bind bind bind success need=0 ----------%d", err);	
     lua_pushinteger(L, err);
     return 1;
 }
@@ -231,10 +231,17 @@ newsocket,remote_ip = socket.accept()
 static int l_socket_accept(lua_State *L)
 {
   int sock = luaL_checkinteger(L, 1); /* server socked */
-  int sock_conn;		      /* request socked */
+  int sock_conn=0;		      /* request socked */
   struct sockaddr remote_ip;
   socklen_t remote_addrlen;
-  sock_conn=lwip_accept(sock,&remote_ip,&remote_addrlen);
+  sock_conn=accept(sock,&remote_ip,&remote_addrlen);
+  if(sock_conn!=-1)
+   {
+     if(sock_conn!=0)
+     {
+       ESP_LOGE(TAG, "sock_conn success ----------sock_conn=%d", err);
+     } 
+   }
   lua_pushinteger(L, sock_conn);
   lua_pushlstring(L, (const char *)&remote_ip, sizeof(struct sockaddr));
   return 1; 
