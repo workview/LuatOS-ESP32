@@ -244,7 +244,7 @@ static int l_socket_accept(lua_State *L)
      } 
    }
   lua_pushinteger(L, sock_conn);
-  lua_pushlstring(L, (const char *)&remote_ip, sizeof(struct sockaddr));
+  //lua_pushlstring(L, (const char *)&remote_ip, sizeof(struct sockaddr));
   return 1; 
 }
 
