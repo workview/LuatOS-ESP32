@@ -258,7 +258,7 @@ static int l_socket_accept(lua_State *L)
        ESP_LOGE(TAG, "remote_ip ----------remote_ip[13]=%d", remote_ip.sa_data[13]);
        
        struct sockaddr_in remote_ipa;
-       remote_ipa=(struct sockaddr_in *)&remote_ip;	     
+       remote_ipa=(struct sockaddr_in )remote_ip;	     
 	     
        ESP_LOGE(TAG, "remote_ip ----------%s", inet_ntoa( remote_ipa.sin_addr)  );	     
 
