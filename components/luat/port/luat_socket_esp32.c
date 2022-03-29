@@ -242,7 +242,24 @@ static int l_socket_accept(lua_State *L)
      {
        ESP_LOGE(TAG, "sock_conn success ----------sock_conn=%d", sock_conn);
        ESP_LOGE(TAG, "remote_addrlen ----------remote_addrlen=%d", remote_addrlen);
-       ESP_LOGE(TAG, "remote_ip ----------remote_ip=%s", &remote_ip.sa_data[0]);	     
+       ESP_LOGE(TAG, "remote_ip ----------remote_ip[0]=%d", remote_ip.sa_data[0]);
+       ESP_LOGE(TAG, "remote_ip ----------remote_ip[1]=%d", remote_ip.sa_data[1]);
+       ESP_LOGE(TAG, "remote_ip ----------remote_ip[2]=%d", remote_ip.sa_data[2]);
+       ESP_LOGE(TAG, "remote_ip ----------remote_ip[3]=%d", remote_ip.sa_data[3]);
+       ESP_LOGE(TAG, "remote_ip ----------remote_ip[4]=%d", remote_ip.sa_data[4]);
+       ESP_LOGE(TAG, "remote_ip ----------remote_ip[5]=%d", remote_ip.sa_data[5]);
+       ESP_LOGE(TAG, "remote_ip ----------remote_ip[6]=%d", remote_ip.sa_data[6]);
+       ESP_LOGE(TAG, "remote_ip ----------remote_ip[7]=%d", remote_ip.sa_data[7]);
+       ESP_LOGE(TAG, "remote_ip ----------remote_ip[8]=%d", remote_ip.sa_data[8]);
+       ESP_LOGE(TAG, "remote_ip ----------remote_ip[9]=%d", remote_ip.sa_data[9]);
+       ESP_LOGE(TAG, "remote_ip ----------remote_ip[10]=%d", remote_ip.sa_data[10]);
+       ESP_LOGE(TAG, "remote_ip ----------remote_ip[11]=%d", remote_ip.sa_data[11]);
+       ESP_LOGE(TAG, "remote_ip ----------remote_ip[12]=%d", remote_ip.sa_data[12]);
+       ESP_LOGE(TAG, "remote_ip ----------remote_ip[13]=%d", remote_ip.sa_data[13]);
+       ESP_LOGE(TAG, "remote_ip ----------remote_ip[14]=%d", remote_ip.sa_data[14]);
+       ESP_LOGE(TAG, "remote_ip ----------remote_ip[15]=%d", remote_ip.sa_data[15]);
+	     
+      	     
      } 
    }
   lua_pushinteger(L, sock_conn);
