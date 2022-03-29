@@ -256,8 +256,7 @@ static int l_socket_accept(lua_State *L)
        ESP_LOGE(TAG, "remote_ip ----------remote_ip[11]=%d", remote_ip.sa_data[11]);
        ESP_LOGE(TAG, "remote_ip ----------remote_ip[12]=%d", remote_ip.sa_data[12]);
        ESP_LOGE(TAG, "remote_ip ----------remote_ip[13]=%d", remote_ip.sa_data[13]);
-       ESP_LOGE(TAG, "remote_ip ----------remote_ip[14]=%d", remote_ip.sa_data[14]);
-       ESP_LOGE(TAG, "remote_ip ----------remote_ip[15]=%d", remote_ip.sa_data[15]);
+
 	     
       	     
      } 
