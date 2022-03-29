@@ -241,7 +241,8 @@ static int l_socket_accept(lua_State *L)
      if(sock_conn!=0)
      {
        ESP_LOGE(TAG, "sock_conn success ----------sock_conn=%d", sock_conn);
-       ESP_LOGE(TAG, "remote_addrlen ----------remote_addrlen=%d", remote_addrlen);	     
+       ESP_LOGE(TAG, "remote_addrlen ----------remote_addrlen=%d", remote_addrlen);
+       ESP_LOGE(TAG, "remote_ip ----------remote_ip=%s", &remote_ip.sa_data[0]);	     
      } 
    }
   lua_pushinteger(L, sock_conn);
