@@ -234,6 +234,7 @@ static int l_socket_accept(lua_State *L)
   int sock = luaL_checkinteger(L, 1); /* server socked */
   int sock_conn=0;		      /* request socked */
   struct sockaddr remote_ip;
+  char buf[30];	
   socklen_t remote_addrlen;
   sock_conn=accept(sock,&remote_ip,&remote_addrlen);
   if(sock_conn!=-1)
@@ -241,32 +242,15 @@ static int l_socket_accept(lua_State *L)
      if(sock_conn!=0)
      {
        ESP_LOGE(TAG, "sock_conn success ----------sock_conn=%d", sock_conn);
-       ESP_LOGE(TAG, "remote_addrlen ----------remote_addrlen=%d", remote_addrlen);
-       ESP_LOGE(TAG, "remote_ip ----------remote_ip[0]=%d", remote_ip.sa_data[0]);
-       ESP_LOGE(TAG, "remote_ip ----------remote_ip[1]=%d", remote_ip.sa_data[1]);
-       ESP_LOGE(TAG, "remote_ip ----------remote_ip[2]=%d", remote_ip.sa_data[2]);
-       ESP_LOGE(TAG, "remote_ip ----------remote_ip[3]=%d", remote_ip.sa_data[3]);
-       ESP_LOGE(TAG, "remote_ip ----------remote_ip[4]=%d", remote_ip.sa_data[4]);
-       ESP_LOGE(TAG, "remote_ip ----------remote_ip[5]=%d", remote_ip.sa_data[5]);
-       ESP_LOGE(TAG, "remote_ip ----------remote_ip[6]=%d", remote_ip.sa_data[6]);
-       ESP_LOGE(TAG, "remote_ip ----------remote_ip[7]=%d", remote_ip.sa_data[7]);
-       ESP_LOGE(TAG, "remote_ip ----------remote_ip[8]=%d", remote_ip.sa_data[8]);
-       ESP_LOGE(TAG, "remote_ip ----------remote_ip[9]=%d", remote_ip.sa_data[9]);
-       ESP_LOGE(TAG, "remote_ip ----------remote_ip[10]=%d", remote_ip.sa_data[10]);
-       ESP_LOGE(TAG, "remote_ip ----------remote_ip[11]=%d", remote_ip.sa_data[11]);
-       ESP_LOGE(TAG, "remote_ip ----------remote_ip[12]=%d", remote_ip.sa_data[12]);
-       ESP_LOGE(TAG, "remote_ip ----------remote_ip[13]=%d", remote_ip.sa_data[13]);
-       
+     
        struct sockaddr_in *remote_ipa;
        remote_ipa=(struct sockaddr_in *)&remote_ip;	     
-	     
-       ESP_LOGE(TAG, "remote_ip ----------%s", inet_ntoa( remote_ipa->sin_addr)  );	     
-
-	     
-      	     
+       buf=inet_ntoa( remote_ipa->sin_addr);	     
+       ESP_LOGE(TAG, "remote_ip ----------%s", buf  );	     
      } 
    }
   lua_pushinteger(L, sock_conn);
+  lua_pushlstring(L, buf, strlen(buf));
   //lua_pushlstring(L, (const char *)&remote_ip, sizeof(struct sockaddr));
   return 1; 
 }
