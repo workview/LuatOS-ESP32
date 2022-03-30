@@ -251,10 +251,10 @@ static int l_socket_accept(lua_State *L)
         ESP_LOGE(TAG, "remote_ip *p_buf ----------%s", p_buf  );
 	for(i_loop=0;i_loop<15;i_loop++)
 	{
-	  buf[i_loop]=(char *)p_buf;
+	  buf[i_loop]=*p_buf;
 	  p_buf++;	
 	}
-	    
+	buf[i_loop]='\0';    
        //memcpy(buf,inet_ntoa( remote_ipa->sin_addr),strlen(inet_ntoa(remote_ipa->sin_addr)));	     
        ESP_LOGE(TAG, "remote_ip ----------%s", buf  );	     
      } 
