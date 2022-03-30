@@ -235,7 +235,7 @@ static int l_socket_accept(lua_State *L)
   int sock_conn=0;		      /* request socked */
   struct sockaddr remote_ip;
   char buf[30];	
-  char i_loop;	
+  uint16_t i_loop=0;	
   //char *p_buf;	
   socklen_t remote_addrlen;
   sock_conn=accept(sock,&remote_ip,&remote_addrlen);
