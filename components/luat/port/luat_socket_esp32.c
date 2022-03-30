@@ -235,6 +235,7 @@ static int l_socket_accept(lua_State *L)
   int sock_conn=0;		      /* request socked */
   struct sockaddr remote_ip;
   char buf[30];	
+  char i_loop;	
   //char *p_buf;	
   socklen_t remote_addrlen;
   sock_conn=accept(sock,&remote_ip,&remote_addrlen);
@@ -246,8 +247,15 @@ static int l_socket_accept(lua_State *L)
      
        struct sockaddr_in *remote_ipa;
        remote_ipa=(struct sockaddr_in *)&remote_ip;	     
-       //*p_buf=inet_ntoa( remote_ipa->sin_addr);
-       memcpy(buf,inet_ntoa( remote_ipa->sin_addr),strlen(inet_ntoa(remote_ipa->sin_addr)));	     
+       char *p_buf=inet_ntoa( remote_ipa->sin_addr);
+        ESP_LOGE(TAG, "remote_ip *p_buf ----------%s", p_buf  );
+	for(i_loop=0;i_loop<15;i++)
+	{
+	  buf[i_loop]=*p_buf;
+	  p_buf++;	
+	}
+	buf[i_loop] ='\0';    
+       //memcpy(buf,inet_ntoa( remote_ipa->sin_addr),strlen(inet_ntoa(remote_ipa->sin_addr)));	     
        ESP_LOGE(TAG, "remote_ip ----------%s", buf  );	     
      } 
    }
