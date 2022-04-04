@@ -42,6 +42,7 @@ LUAMOD_API int luaopen_twai(lua_State *L);
 LUAMOD_API int luaopen_uart_brk(lua_State *L);
 LUAMOD_API int luaopen_sdmmc(lua_State *L);
 LUAMOD_API int luaopen_miniz(lua_State *L);
+LUAMOD_API int luaopen_espws(lua_State *L);
 
 static const luaL_Reg loadedlibs[] = {
     {"_G", luaopen_base},               // _G
@@ -166,6 +167,9 @@ static const luaL_Reg loadedlibs[] = {
 #ifdef LUAT_USE_ESPMQTT
     {"espmqtt", luaopen_espmqtt}, // espmqtt
 #endif
+#ifdef LUAT_USE_ESPWEBSOCKET
+    {"espws", luaopen_espws}, // espws
+#endif
 #ifdef LUAT_USE_LVGL
     {"lvgl", luaopen_lvgl}, // lvgl
 #endif
@@ -205,6 +209,9 @@ static const luaL_Reg loadedlibs[] = {
 #endif
 #ifdef LUAT_USE_FATFS
     {"fatfs", luaopen_fatfs},
+#endif
+#ifdef LUAT_USE_YMODEM
+  {"ymodem", luaopen_ymodem},
 #endif
     {NULL, NULL}};
 
